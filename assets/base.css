@@ -1,0 +1,78 @@
+html {
+  --content-max-width: 750px;
+  --space-xs: 5px;
+  --space-sm: 10px;
+  --space: 15px;
+  --space-lg: 30px;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-feature-settings:normal;
+  font-variation-settings:normal;
+  -webkit-tap-highlight-color:transparent
+  background-color: #f1f1f1;
+}
+
+#content-wrapper {
+  margin: var(--space) auto;
+  padding: var(--space);
+  max-width: var(--content-max-width);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  font-weight: normal;
+  font-size: var(--space);
+}
+
+p, a {
+  font-size: var(--space);
+}
+
+main {
+  min-height: 80vh;
+  display: flex;
+  gap: var(--space);
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+
+  h1 {
+    flex: 1;
+    font-weight: bold;
+  }
+}
+
+/* CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
