@@ -1,9 +1,14 @@
 html {
-  --content-max-width: 750px;
+  --content-max-width: 700px;
   --space-xs: 5px;
   --space-sm: 10px;
   --space: 15px;
   --space-lg: 30px;
+  --space-xl: 45px;
+
+  --neutral-gray-90: #606060;
+  --neutral-gray-50: #d0d0d0;
+  --neutral-gray-10: #fafafa;
 }
 
 body {
@@ -21,13 +26,21 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
-  font-weight: normal;
   font-size: var(--space);
+  font-weight: bold;
 }
 
 p, a {
   font-size: var(--space);
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--neutral-gray-50);;
+  margin: var(--space-sm) 0;
+  padding: 0;
 }
 
 main {
@@ -42,15 +55,44 @@ header {
   flex-direction: row;
   align-items: center;
   gap: var(--space-xs);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 
   h1 {
     flex: 1;
-    font-weight: bold;
   }
 }
 
-/* CSS Reset */
+footer {
+  text-align: right;
+}
+
+/** Home page **/
+.project-card-grid {
+  margin: var(--space) 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space);
+}
+
+.project-card {
+  border-radius: var(--space-xs);
+  border: 1px solid var(--neutral-gray-50);;
+  padding: var(--space);
+  box-shadow: 0px 1px 1px 0px var(--neutral-gray-50);
+  height: 90px;
+  transition: background-color 0.25s linear;
+}
+
+.project-card:hover {
+  background-color: var(--neutral-gray-10)
+}
+
+.external-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+/** CSS Reset **/
 *, *::before, *::after {
   box-sizing: border-box;
 }

@@ -7,20 +7,33 @@ layout: default
 
 
 ## Gus Glover
-I'm a multidisciplinary software engineer from Seattle, WA. I founded [Arcsine Imaging](https://arcsineimaging.com).
-Currently, I'm working at Amazon. I specialize in building engaging data
-visualizations around 3D media.
+I'm a product-focused software engineer from Seattle, WA. I founded [Arcsine Imaging](https://arcsineimaging.com).
+Currently, I'm solving Big Tech Problems as a Front End Engineer at Amazon. 
 
 ***
 ## Projects
 
-Viperei annos quanta, et meta quid Niobe et **devolvunt faber**. Uteroque aere
-*adiit perdere* telis floribus et remorum oculos. Parebunt *caput medicamine
-queri* litora mea fieres populos pallent, sua *crater color*, ad nuper consulit.
-Metuens *ferunt et cursus*, aut terrae precibus **et ipso** quamvis. Nos perque
-videbar noctes dira diro ultra, tibi vecta conspicit virgine recessu patiemur
-ferventes generoso.
+Here are a few things that I'm proud of. Viperei annos quanta, et meta quid Niobe et **devolvunt faber**. Uteroque aere
+*adiit perdere* telis floribus et remorum oculos.
 
-- arcsineimaging
-- tonydelivers
-- pokepalettes
+<section class="project-card-grid">
+  <a class="project-card" href="/projects/arcsine" style="grid-column: 1 / -1;">
+    <article>
+      <h3>arcsine imaging</h3>
+    </article>
+  </a>
+  <a class="project-card" href="/projects/tony-delivers">
+    <article>
+      <h3>tony delivers</h3>
+      <img href="assets/images/pokepalettes.png" />
+    </article>
+  </a>
+  <a class="project-card" href="/projects/pokepalettes">
+    <article>
+      <h3>pokepalettes</h3>
+    </article>
+  </a>
+</section>
+
+What else is new? Here's some more text for you, dear. Some closing remarks for you to read
+through at your earliest convenience.
