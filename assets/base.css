@@ -7,15 +7,16 @@ html {
   --space-xl: 45px;
 
   --neutral-gray-90: #606060;
-  --neutral-gray-50: #d0d0d0;
+  --neutral-gray-50: #c0c0c0;
+  --neutral-gray-30: #e0e0e0;
   --neutral-gray-10: #fafafa;
 }
 
 body {
   font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-feature-settings:normal;
-  font-variation-settings:normal;
-  -webkit-tap-highlight-color:transparent
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent
   background-color: #f1f1f1;
 }
 
@@ -67,6 +68,14 @@ footer {
 }
 
 /** Home page **/
+.card {
+  border-radius: var(--space-xs);
+  border-top: 1px solid var(--neutral-gray-30);
+  box-shadow: 0px 1px 3px 0px var(--neutral-gray-50);
+  padding: var(--space-xs);
+  transition: background-color 0.25s linear;
+}
+
 .project-card-grid {
   margin: var(--space) 0;
   display: grid;
@@ -75,12 +84,8 @@ footer {
 }
 
 .project-card {
-  border-radius: var(--space-xs);
-  border: 1px solid var(--neutral-gray-50);;
   padding: var(--space);
-  box-shadow: 0px 1px 1px 0px var(--neutral-gray-50);
-  height: 90px;
-  transition: background-color 0.25s linear;
+  height: calc(var(--space-lg) * 3);
 }
 
 .project-card:hover {
