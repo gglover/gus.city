@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Pokepalettes
-permalink: /projects/pokepalettes
+permalink: /pokepalettes
 ---
 
 <h2 markdown="0">{% include external_link.html title='pokepalettes.com' href='https://pokepalettes.com' %}</h2>
