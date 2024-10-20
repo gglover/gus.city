@@ -106,19 +106,23 @@ footer {
   transition: background-color 200ms linear;
   cursor: pointer;
 
+  h3 {
+    text-decoration: underline;
+  }
+
   span {
     font-size: 14px;
   }
+}
+
+a:focus .project, a:active .project, .project:hover {
+  background-color: var(--neutral-gray-1);
 }
 
 .project-list a {
   width: fit-content;
   text-decoration: none;
   display: block;
-}
-
-.project:hover {
-  background-color: var(--neutral-gray-1);
 }
 
 /** CSS Reset **/
