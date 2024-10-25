@@ -118,7 +118,7 @@ footer {
   }
 }
 
-a:focus .project, a:active .project, .project:hover {
+.project:hover, .project:active {
   background-color: var(--neutral-gray-1);
 }
 
