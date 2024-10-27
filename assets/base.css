@@ -104,12 +104,11 @@ footer {
 
 .project {
   padding: var(--space-sm) var(--space);
-  border-radius: var(--space-sm);
   width: fit-content;
-  transition: background-color 200ms linear;
   cursor: pointer;
+  border-radius: var(--space-sm);
 
-  h3 {
+  h2 {
     text-decoration: underline;
   }
 
@@ -118,7 +117,11 @@ footer {
   }
 }
 
-.project:hover, .project:active {
+.project, .external-link {
+  transition: background-color 200ms linear;
+}
+
+.project:hover, .project:active, .external-link:hover {
   background-color: var(--neutral-gray-1);
 }
 
