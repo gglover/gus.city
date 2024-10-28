@@ -6,7 +6,6 @@
 # feature for the data you need to update frequently.
 
 title: Gus Glover
-email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -15,6 +14,7 @@ domain: gus.city
 url: https://gus.city
 linkedin_url: https://www.linkedin.com/in/gusglover/
 github_url: https://github.com/gglover
+email: gg@gus.city
 
 # Exclude from processing.
 # The following items will not be processed, by default.
