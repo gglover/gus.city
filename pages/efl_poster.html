@@ -1,0 +1,51 @@
+---
+layout: default
+title: EFL Poster • Gus Glover
+permalink: /efl-poster
+---
+
+<h1>Big English Football Poster</h1>
+<div class="time-stamp">NOV 2024</div>
+
+<p>When I was a kid, I really wanted a poster with the badge of every team in the 
+{% include external_link.html title='English football league system' href='https://en.wikipedia.org/wiki/English_football_league_system#The_system' %} on it.
+So I decided to make one and share it for free.
+</p>
+
+<p>Download your preferred size below, take the file to a print shop, hang it up, and enjoy!</p>
+
+<h2>Full resolution downloads:</h2>
+
+<ul>
+  <li>
+    {% include external_link.html title='B1 | Movie Poster Size (27" x 40")' href='' %}
+  </li>
+  <li>
+    {% include external_link.html title='A1 | Concert Poster Size (24" x 36")' href='' %}
+  </li>
+</ul>
+
+<div class="full-width" style="display: flex; gap: var(--space); justify-content: center;">
+  {% include image_card.html src="efl_poster.jpg" alt="Large poster with badges from 7 tiers of english football" height="600px" %}
+  {% include image_card.html src="efl_poster_physical_old.jpg" alt="Large poster with badges from 7 tiers of english football" height="600px"%}
+</div>
+
+<p></p>
+
+<p>If you found this useful or have it on your wall I'd love to hear from you! gg@gus.city</p>
+
+<h2>{% include external_link.html title='Tech details' href='https://github.com/gglover/efl-poster' %}</h2>
+
+<p>I wrote a few python utility scripts to automate the process. Data is sourced from league tables and team pages on Wikipedia.
+The scraped HTML is then piped into BeautifulSoup to extract relevant metadata.</p>
+
+<p>To speed up badge layout I wrote a simple HTML / CSS document generator.
+The final poster is exported directly from Chrome using the <code>Full size screenshot</code> devtools built-in. This isn't super flexible, but any
+final touch-ups can easily be performed by importing the poster into Illustrator.
+</p>
+
+<p>This setup makes it mostly painless for me to update the poster for future promotion / relegation cycles.</p>
+
+
+
+

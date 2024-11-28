@@ -73,7 +73,13 @@ footer {
   text-align: right;
 }
 
-/** Home page **/
+
+/** Utility **/
+.full-width {
+  margin-left: calc(-100vw / 2 + var(--content-max-width) / 2);
+  margin-right: calc(-100vw / 2 + var(--content-max-width) / 2);
+}
+
 .card {
   border-radius: var(--space-xs);
   background-color: white;
@@ -99,6 +105,8 @@ footer {
   align-items: center;
 }
 
+
+/** Home page **/
 .project-list {
   padding: var(--space-xs) 0;
 }
@@ -131,6 +139,7 @@ footer {
   text-decoration: none;
   display: block;
 }
+
 
 /** CSS Reset **/
 *, *::before, *::after {

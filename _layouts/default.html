@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-language" content="en">
 
-    <link rel="shortcut icon" type="image/png" href="/assets/favicon.svg">
     <title>{{ page.title | default: site.title }}</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/favicon.svg">
     <link rel="canonical" href="{{ site.url | append: page.url }}" />
 
     <meta property="og:title" content="{{ page.title | default: site.title }}" />
@@ -20,6 +20,7 @@
     <meta property="twitter:title" content="{{ page.title | default: site.title }}"  />
 
     <link rel="stylesheet" href="/assets/base.css" />
+    {% include analytics.html %}
   </head>
   <body>
       <div id="content-wrapper">
