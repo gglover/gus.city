@@ -1,3 +1,17 @@
+{% if include.caption %}
+<figure>
+{% endif %}
+
 <div class="card">
-  <img alt="{{ include.alt }}" src="/assets/images/{{ include.src }}" height="{{ include.height| default: 'auto' }}"/>
+  <img
+    alt="{{ include.alt }}"
+    src="/assets/images/{{ include.src }}"
+    width="{{ include.width | default: '100%' }}"
+    height="{{ include.height | default: 'auto' }}"
+  />
 </div>
+
+{% if include.caption %}
+<figcaption>{{ include.caption }}</figcaption>
+</figure>
+{% endif %}
