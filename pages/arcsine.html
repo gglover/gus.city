@@ -8,53 +8,61 @@ permalink: /arcsine-imaging
 <div class="time-stamp">AUG 2023</div>
 
 <p>
-Arcsine Imaging was a hybrid software-photography studio I started in early 2020 with my good friend Dustin. We built an optimized 3D format for
-rendering physical objects the web. Here's a sample:
+Arcsine Imaging was a hybrid software-photography studio, which I founded in early 2020. We built a 3D viewer optimized to
+render physical objects on the web. Here is an example:
 </p>
 
 <div class="full-width">
-  <div class="card">
-    <div id="cloudultra-viewer" style="height: 600px; width: 700px;"></div>
-  </div>
+  <figure>
+    <figcaption style="text-align: center;">On Running Cloudultra – 2021</figcaption>
+    <div class="card">
+      <div id="cloudultra-viewer" style="height: 600px; width: 700px;"></div>
+    </div>
+  </figure>
 </div>
 
 <p>
-Before this venture, we had spent six years collectively in the augmented reality space. We we're frustrated by the low fidelity graphics,
-awkward wearables, and lack of clear product use-case throughout that industry. We wanted to build something more tangible.
+What you're seeing is real studio photos dynamically projected and mapped onto a high-quality, compressed 3D mesh.
+The idea was to tailor textures, animations, and UX around attractive angles in the underlying photography. Creatives often care 
+only about a few select viewpoints and predefined lighting setups, rather than an entirely physically accurate asset. 
 </p>
 
 <p>
-We built an embeddable 3D viewer and asset compression pipeline from scratch to support the use dynamically project photo textures.
-The idea was to tailor animations and UX around attractive angles in the underlying photography. Creatives often only cared about a few select
-viewpoints rather than an entirely physically accurate asset.
+Most of our clients were large footwear brands seeking a more forward-thinking product presentation. They would send products to our studio for 
+digitization; we would collaborate on styling and lighting, and then shoot some high-quality product images. The resulting model could be 
+embedded into a wide variety of web-based promotional materials. We provided a flexible 
+{% include external_link.html title='Javascript SDK' href='https://arcsineimaging.com/documentation' %} 
+that enabled developers to customize their integration.
 </p>
 
 <p>
-Most of our clients were footwear brands seeking a more forward-thinking product presentation. They would send new products to our
-studio to and we would collaborate on styling / lighting. The resulting model could be embedded into a wide variety of web-based promotional material.
-</p>
-
-<p>
-We also found great, though less marketable, results with outdoor scenes:
+We also achieved great results with larger-scale outdoor subjects:
 </p>
 
 <div class="full-width">
-  <div class="card">
-    <div id="poster-wall-viewer" style="height: 600px; width: 700px;"></div>
-  </div>
+  <figure>
+    <figcaption style="text-align: center;">Post Alley Art Wall – Seattle – 2022</figcaption>
+    <div class="card">
+      <div id="poster-wall-viewer" style="height: 600px; width: 700px;"></div>
+    </div>
+  </figure>
 </div>
 
 <p>
-Ultimately, the wide variety of client needs and intricacies of the scanning process stopped us from reaching the level of automation
-we'd hoped to achieve. Which is fine, not every piece of tech needs to be universe-scale. We did high-quality work for amazing clients 
-I learned an incredible amount about business, product development, and myself over my time at Arcsine.
+Ultimately, the diverse customer needs and scanning complexities prevented us from achieving our desired level of automation. This is fine, 
+as not every piece of tech needs to be universe-scale. In this case, we just couldn't find the market share to make a living from Arcsine.
+</p>
+
+<p>
+We delivered high-quality work for many excellent clients. I had the opportunity to step outside my SDE roots and learn an incredible 
+amount about photography, business, sales, product design, and myself. I'll always be grateful for that.
 </p>
 
 <script>
   const arcsineSdkScript = document.createElement('script');
   arcsineSdkScript.src = 'https://cdn.arcsineimaging.com/scripts/2.4.0/sdk.bundle.js';
 
-  arcsineSdkScript.addEventListener('load', function() {
+  arcsineSdkScript.addEventListener('load', () => {
     window.arcsineImaging.createViewer(document.getElementById('cloudultra-viewer'), {
       id: 'cloudultrav2_c899665b68d4',
       autoLoad: true,
