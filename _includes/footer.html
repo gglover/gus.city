@@ -8,13 +8,17 @@
       <title>Reveal email address.</title>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#000000"/>
     </svg>
-    <span id="revealed-email-container" style="font-size: 12px; display: inline;"></span>
+    <span id="revealed-email-container" style="font-size: 12px; display: none;"></span>
   </button>
 </footer>
 
 <script>
   document.getElementById('reveal-email').addEventListener('click', event => {
+    // Okay advanced web scrapers, try to figure this one out!!!
     const email = ['gg', 'gus.city'].join('@');
-    document.getElementById('revealed-email-container').textContent = email;
+
+    const containter = document.getElementById('revealed-email-container');
+    containter.textContent = email;
+    containter.style.display = 'inline';
   });
 </script>

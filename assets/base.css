@@ -46,25 +46,21 @@ ul {
   padding-inline-start: 20px;
 }
 
-figcaption {
-  margin-top: var(--space-sm);
-  font-style: italic;
-  font-size: 12px; 
-}
-
 code {
   background-color: var(--neutral-gray-1);
 }
 
 button {
   cursor: pointer;
-  padding: 2px;
-  gap: 2px;
+  padding: 2px 4px;
+  gap: 4px;
   border-radius: 2px;
 	background-color: var(--neutral-gray-4);
 	border: 1px solid black;
 	font-size: 12px;
 	text-decoration:none;
+  display: flex;
+  flex-direction: row;
 }
 
 button:hover {
@@ -144,6 +140,13 @@ footer {
 .external-link {
   display: inline-flex;
   align-items: center;
+}
+
+.italics-caption {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
 }
 
 
