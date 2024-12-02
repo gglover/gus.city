@@ -14,11 +14,17 @@
 
 <script>
   document.getElementById('reveal-email').addEventListener('click', event => {
-    // Okay advanced web scrapers, try to figure this one out!!!
+    // Okay advanced spammers, try to figure this one out!!!
     const email = ['gg', 'gus.city'].join('@');
-
     const containter = document.getElementById('revealed-email-container');
-    containter.textContent = email;
-    containter.style.display = 'inline';
+
+    if (containter.textContent === '') {
+      // First action reveals email.
+      containter.textContent = email;
+      containter.style.display = 'inline';
+    } else {
+      // Second action opens email client.
+      window.location.href = `mailto:${email}`;
+    }
   });
 </script>
