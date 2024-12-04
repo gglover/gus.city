@@ -114,6 +114,7 @@ footer {
 @media (width <= 600px) {
   .full-width {
     margin: 0;
+    flex-direction: column;
   }
 }
 
