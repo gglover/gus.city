@@ -1,3 +1,82 @@
-<header>
-  <a href="/">{% include logo.svg %}</a>
-</header>
+<header></header>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    // Canvas dimensions
+    const canvasWidth = 500;
+    const canvasHeight = 140;
+
+    // Create a scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xfcfcfc);
+
+    // Set up the camera (Orthographic)
+    const aspectRatio = canvasWidth / canvasHeight;
+    const frustumSize = 5; // Customize based on your model size
+    const camera = new THREE.OrthographicCamera(
+        -frustumSize * aspectRatio, frustumSize * aspectRatio,
+        frustumSize, -frustumSize, 
+        1, 1000
+    );
+    camera.position.set(20, 0, 0); // Adjust position as needed
+
+    // Create a renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(canvasWidth, canvasHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.querySelector('header').appendChild(renderer.domElement);
+
+    // Orbit controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.minPolarAngle = Math.PI / 2;
+    controls.maxPolarAngle = Math.PI / 2;
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.15;
+    controls.update();
+
+    // Add some lighting
+    const light = new THREE.DirectionalLight(0xffffff, 5);
+    light.position.set(60, 10, 0);
+    camera.add(light);
+    scene.add(camera);
+
+    // Add some lighting
+    // const light2 = new THREE.DirectionalLight(0xffffff, 5);
+    // light2.position.set(-10, 10, 0);
+    // scene.add(light2);
+
+    // Load a GLB model
+    let model = null;
+
+    const loader = new GLTFLoader();
+    loader.load(
+        'assets/city.glb',
+        (gltf) => {
+            model = gltf.scene;
+            model.rotateY(0.5);
+            scene.add(model);
+            light.target = model;
+            render(); // Render after loading the model
+        },
+        undefined,
+        (error) => {
+            console.error('Error loading the model', error);
+        }
+    );
+
+    // Render function
+    function render() {
+      requestAnimationFrame( render );
+
+      // required if controls.enableDamping or controls.autoRotate are set to true
+      controls.update();
+      light.target = model;
+
+      renderer.render(scene, camera);
+    }
+</script>

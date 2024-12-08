@@ -1,6 +1,6 @@
 /** Document setup **/
 html {
-  --content-max-width: 600px;
+  --content-max-width: 580px;
   --space-xs: 5px;
   --space-sm: 10px;
   --space: 15px;
@@ -84,14 +84,22 @@ main {
 }
 
 header {
+  min-height: 144px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--space-xs);
-  margin-bottom: var(--space);
+  margin-bottom: calc(var(--space) + var(--space-sm));
+  border-top: 1px solid var(--neutral-gray-3);
+  border-bottom: 3px solid var(--neutral-gray-3);
 
-  h1 {
-    flex: 1;
+  canvas {
+    margin: auto;
+    cursor: grab;
+  }
+
+  canvas:active {
+    cursor: grabbing;
   }
 }
 
