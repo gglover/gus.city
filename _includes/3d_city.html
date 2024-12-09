@@ -1,0 +1,102 @@
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/"
+    }
+  }
+</script>
+
+<script type="module">
+  import * as THREE from 'three';
+  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+  const ASPECT_RATIO = 27 / 7;
+  const FRUSTUM_SIZE = 5;
+  const NEAR_CLIP = 1;
+  const FAR_CLIP = 1000;
+
+  const INITIAL_CAMERA_POSITION = [20, 0, 0];
+  const DRAG_ROTATION_SPEED = 0.1;
+  const AUTO_ROTATION_SPEED = 0.2;
+
+  const LIGHT_INTENSITY = 5;
+  const LIGHT_OFFSET = [30, 50, 0];
+
+  const MODEL_GLB_PATH = 'assets/city.glb';
+  const INITIAL_MODEL_ROTATION = 0.5;
+
+  const container = document.querySelector('header');
+  const containerWidth = container.clientWidth;
+
+  const canvasWidth = containerWidth;
+  const canvasHeight = containerWidth / ASPECT_RATIO;
+
+  // Create a renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(canvasWidth, canvasHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
+
+  // Create a scene
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xfcfcfc);
+
+  // Set up the camera (Orthographic)
+  const camera = new THREE.OrthographicCamera(
+      -FRUSTUM_SIZE * ASPECT_RATIO, FRUSTUM_SIZE * ASPECT_RATIO,
+      FRUSTUM_SIZE, -FRUSTUM_SIZE, 
+      NEAR_CLIP, FAR_CLIP
+  );
+
+  const position = window.localStorage.cameraStart?.split(',') ?? INITIAL_CAMERA_POSITION;
+  camera.position.set(...position); // Adjust position as needed
+
+  // Orbit controls
+  const controls = new OrbitControls(camera, renderer.domElement);
+
+  controls.minPolarAngle = Math.PI / 2;
+  controls.maxPolarAngle = Math.PI / 2;
+  controls.enableZoom = false;
+  controls.enablePan = false;
+  controls.rotateSpeed = DRAG_ROTATION_SPEED;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = AUTO_ROTATION_SPEED;
+  controls.update();
+
+  // Add some lighting
+  const light = new THREE.DirectionalLight(0xffffff, LIGHT_INTENSITY);
+  light.position.set(...LIGHT_OFFSET);
+
+  camera.add(light);
+  scene.add(camera);
+
+  // Load a GLB model
+  let model = null;
+
+  const loader = new GLTFLoader();
+  loader.load(MODEL_GLB_PATH,
+      gltf => {
+          model = gltf.scene;
+          model.rotateY(INITIAL_MODEL_ROTATION);
+          scene.add(model);
+
+          render();
+      },
+      undefined,
+      (error) => {
+          console.error('Error loading the model', error);
+      }
+  );
+
+  const render = () => {
+      requestAnimationFrame( render );
+
+      controls.update();
+      light.target = model;
+      window.localStorage.cameraStart = camera.position.toArray(); 
+
+      renderer.render(scene, camera);
+  }
+</script>
