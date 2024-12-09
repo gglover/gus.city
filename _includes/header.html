@@ -13,7 +13,8 @@
     const FAR_CLIP = 1000;
 
     const INITIAL_CAMERA_POSITION = [20, 0, 0];
-    const ROTATION_SPEED = 0.2;
+    const DRAG_ROTATION_SPEED = 0.1;
+    const AUTO_ROTATION_SPEED = 0.25;
 
     const LIGHT_INTENSITY = 5;
     const LIGHT_OFFSET = [50, 50, 0];
@@ -22,7 +23,8 @@
     const INITIAL_MODEL_ROTATION = 0.5;
 
     const container = document.querySelector('header');
-    const containerWidth = container.offsetWidth;
+    const containerWidth = container.clientWidth;
+
     const canvasWidth = containerWidth;
     const canvasHeight = containerWidth / ASPECT_RATIO;
 
@@ -53,9 +55,9 @@
     controls.maxPolarAngle = Math.PI / 2;
     controls.enableZoom = false;
     controls.enablePan = false;
-    controls.rotateSpeed = ROTATION_SPEED;
+    controls.rotateSpeed = DRAG_ROTATION_SPEED;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = ROTATION_SPEED;
+    controls.autoRotateSpeed = AUTO_ROTATION_SPEED;
     controls.update();
 
     // Add some lighting

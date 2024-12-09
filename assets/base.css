@@ -11,7 +11,7 @@ html {
   --neutral-gray-2: #a2a2a2;
   --neutral-gray-3: #222222;
   --neutral-gray-4: #fcfcfc;
-  --neutral-gray-5: #cecece;
+  --neutral-gray-5: #c0c0c0;
 }
 
 body {
@@ -85,21 +85,21 @@ main {
 
 header {
   position: relative;
-  aspect-ratio: 27 / 7;
+  aspect-ratio: 26 / 7;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--space-xs);
   margin-bottom: calc(var(--space) + var(--space-sm));
-  border-top: 1px solid var(--neutral-gray-3);
-  border-bottom: 3px solid var(--neutral-gray-3);
+  border-top: 1px solid var(--neutral-gray-5);
+  border-bottom: 3px solid black;
 
   a {
     position: absolute;
-    top: -16px;
+    top: -14px;
     right: 0;
     background-color: var(--neutral-gray-4);
-    padding: 2px 0 2px 2px;
+    padding-left: 5px;
     text-decoration: none;
   }
 
