@@ -1,67 +1,80 @@
-<header></header>
+<header>
+    <a href="/">gus.city</a>
+</header>
 
 <script type="module">
     import * as THREE from 'three';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-    // Canvas dimensions
-    const canvasWidth = 500;
-    const canvasHeight = 140;
+    const ASPECT_RATIO = 27 / 7;
+    const FRUSTUM_SIZE = 5;
+    const NEAR_CLIP = 1;
+    const FAR_CLIP = 1000;
+
+    const INITIAL_CAMERA_POSITION = [20, 0, 0];
+    const ROTATION_SPEED = 0.2;
+
+    const LIGHT_INTENSITY = 5;
+    const LIGHT_OFFSET = [50, 50, 0];
+
+    const MODEL_GLB_PATH = 'assets/city.glb';
+    const INITIAL_MODEL_ROTATION = 0.5;
+
+    const container = document.querySelector('header');
+    const containerWidth = container.offsetWidth;
+    const canvasWidth = containerWidth;
+    const canvasHeight = containerWidth / ASPECT_RATIO;
+
+    // Create a renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(canvasWidth, canvasHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
 
     // Create a scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xfcfcfc);
 
     // Set up the camera (Orthographic)
-    const aspectRatio = canvasWidth / canvasHeight;
-    const frustumSize = 5; // Customize based on your model size
     const camera = new THREE.OrthographicCamera(
-        -frustumSize * aspectRatio, frustumSize * aspectRatio,
-        frustumSize, -frustumSize, 
-        1, 1000
+        -FRUSTUM_SIZE * ASPECT_RATIO, FRUSTUM_SIZE * ASPECT_RATIO,
+        FRUSTUM_SIZE, -FRUSTUM_SIZE, 
+        NEAR_CLIP, FAR_CLIP
     );
-    camera.position.set(20, 0, 0); // Adjust position as needed
 
-    // Create a renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(canvasWidth, canvasHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.querySelector('header').appendChild(renderer.domElement);
+    const position = window.localStorage.cameraStart?.split(',') ?? INITIAL_CAMERA_POSITION;
+    camera.position.set(...position); // Adjust position as needed
 
     // Orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
+
     controls.minPolarAngle = Math.PI / 2;
     controls.maxPolarAngle = Math.PI / 2;
     controls.enableZoom = false;
     controls.enablePan = false;
+    controls.rotateSpeed = ROTATION_SPEED;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.15;
+    controls.autoRotateSpeed = ROTATION_SPEED;
     controls.update();
 
     // Add some lighting
-    const light = new THREE.DirectionalLight(0xffffff, 5);
-    light.position.set(60, 10, 0);
+    const light = new THREE.DirectionalLight(0xffffff, LIGHT_INTENSITY);
+    light.position.set(...LIGHT_OFFSET);
     camera.add(light);
     scene.add(camera);
-
-    // Add some lighting
-    // const light2 = new THREE.DirectionalLight(0xffffff, 5);
-    // light2.position.set(-10, 10, 0);
-    // scene.add(light2);
 
     // Load a GLB model
     let model = null;
 
     const loader = new GLTFLoader();
-    loader.load(
-        'assets/city.glb',
-        (gltf) => {
+    loader.load(MODEL_GLB_PATH,
+        gltf => {
             model = gltf.scene;
-            model.rotateY(0.5);
+            model.rotateY(INITIAL_MODEL_ROTATION);
             scene.add(model);
-            light.target = model;
-            render(); // Render after loading the model
+
+            render();
         },
         undefined,
         (error) => {
@@ -69,14 +82,13 @@
         }
     );
 
-    // Render function
-    function render() {
-      requestAnimationFrame( render );
+    const render = () => {
+        requestAnimationFrame( render );
 
-      // required if controls.enableDamping or controls.autoRotate are set to true
-      controls.update();
-      light.target = model;
+        controls.update();
+        light.target = model;
+        window.localStorage.cameraStart = camera.position.toArray(); 
 
-      renderer.render(scene, camera);
+        renderer.render(scene, camera);
     }
 </script>

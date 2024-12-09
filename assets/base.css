@@ -84,7 +84,8 @@ main {
 }
 
 header {
-  min-height: 144px;
+  position: relative;
+  aspect-ratio: 27 / 7;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -92,6 +93,15 @@ header {
   margin-bottom: calc(var(--space) + var(--space-sm));
   border-top: 1px solid var(--neutral-gray-3);
   border-bottom: 3px solid var(--neutral-gray-3);
+
+  a {
+    position: absolute;
+    top: -16px;
+    right: 0;
+    background-color: var(--neutral-gray-4);
+    padding: 2px 0 2px 2px;
+    text-decoration: none;
+  }
 
   canvas {
     margin: auto;
@@ -123,6 +133,10 @@ footer {
 @media (width <= 600px) {
   .full-width {
     margin: 0;
+  }
+
+  img {
+    height: auto;
   }
 }
 
