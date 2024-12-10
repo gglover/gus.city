@@ -21,8 +21,9 @@
   const DRAG_ROTATION_SPEED = 0.1;
   const AUTO_ROTATION_SPEED = 0.2;
 
-  const LIGHT_INTENSITY = 5;
-  const LIGHT_OFFSET = [30, 50, 0];
+  const LIGHT_SIZE = 5;
+  const LIGHT_INTENSITY = 160;
+  const LIGHT_OFFSET = [50, 0, 0];
 
   const MODEL_GLB_PATH = 'assets/city.glb';
   const INITIAL_MODEL_ROTATION = 0.5;
@@ -51,7 +52,8 @@
   );
 
   const position = window.localStorage.cameraStart?.split(',') ?? INITIAL_CAMERA_POSITION;
-  camera.position.set(...position); // Adjust position as needed
+  camera.position.set(...position);
+  scene.add(camera);
 
   // Orbit controls
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -66,11 +68,10 @@
   controls.update();
 
   // Add some lighting
-  const light = new THREE.DirectionalLight(0xffffff, LIGHT_INTENSITY);
-  light.position.set(...LIGHT_OFFSET);
-
-  camera.add(light);
-  scene.add(camera);
+  const rectLight = new THREE.RectAreaLight(0xffffff, LIGHT_INTENSITY, LIGHT_SIZE, LIGHT_SIZE);
+  rectLight.position.set(...LIGHT_OFFSET);
+  rectLight.lookAt(0, 0, 0);
+  camera.add(rectLight)
 
   // Load a GLB model
   let model = null;
@@ -80,8 +81,13 @@
       gltf => {
           model = gltf.scene;
           model.rotateY(INITIAL_MODEL_ROTATION);
-          scene.add(model);
+          model.traverse(obj => {
+            if (obj.material) {
+              obj.material.metalness = 0;
+            } 
+          });
 
+          scene.add(model);
           render();
       },
       undefined,
@@ -94,7 +100,6 @@
       requestAnimationFrame( render );
 
       controls.update();
-      light.target = model;
       window.localStorage.cameraStart = camera.position.toArray(); 
 
       renderer.render(scene, camera);

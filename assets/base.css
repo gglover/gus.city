@@ -50,7 +50,7 @@ header {
 
   a {
     position: absolute;
-    top: calc(var(--space) * -1);
+    top: -14px;
     right: 0;
     background-color: var(--neutral-gray-4);
     padding-left: var(--space-xs);
