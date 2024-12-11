@@ -54,7 +54,6 @@ header {
     right: 0;
     background-color: var(--neutral-gray-4);
     padding-left: var(--space-xs);
-    text-decoration: none;
   }
 
   canvas {
@@ -67,9 +66,16 @@ header {
 }
 
 footer {
+  margin-top: var(--space-lg);
   display: flex;
   gap: var(--space-xs);
   justify-content: flex-end;
+
+  hr {
+    flex: 1;
+    display: flex;
+    transform: translateY(4px);
+  }
 }
 
 /** Semantic tags **/
