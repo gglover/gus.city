@@ -179,7 +179,7 @@ hr {
 
 /** Home page **/
 .project-list {
-  padding: var(--space-xs) 0;
+  margin-top: calc(var(--space-sm) * -1);
 }
 
 .project {

@@ -62,6 +62,7 @@
   controls.maxPolarAngle = Math.PI / 2;
   controls.enableZoom = false;
   controls.enablePan = false;
+  controls.enableDamping = true;
   controls.rotateSpeed = DRAG_ROTATION_SPEED;
   controls.autoRotate = true;
   controls.autoRotateSpeed = AUTO_ROTATION_SPEED;
@@ -71,7 +72,7 @@
   const rectLight = new THREE.RectAreaLight(0xffffff, LIGHT_INTENSITY, LIGHT_SIZE, LIGHT_SIZE);
   rectLight.position.set(...LIGHT_OFFSET);
   rectLight.lookAt(0, 0, 0);
-  camera.add(rectLight)
+  camera.add(rectLight);
 
   // Load a GLB model
   let model = null;
