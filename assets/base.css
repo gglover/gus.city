@@ -124,6 +124,19 @@ hr {
 }
 
 /** Utility **/
+.shimmer {
+  background: linear-gradient(90deg, var(--neutral-gray-4) 40%, #f0f0f0 50%, var(--neutral-gray-4) 60%);
+  background-size: 300%;
+  background-position-x: 100%;
+  animation: shimmer 1s infinite linear;
+}
+
+@keyframes shimmer {
+  to {
+     background-position-x: 0%
+  }
+}
+
 .full-width {
   margin-left: calc(-100vw / 2 + var(--content-max-width) / 2);
   margin-right: calc(-100vw / 2 + var(--content-max-width) / 2);
@@ -184,6 +197,7 @@ hr {
 
 .project {
   padding: var(--space-sm) var(--space);
+  margin-left: calc(var(--space) * -1);
   width: fit-content;
   cursor: pointer;
   border-radius: var(--space-sm);
