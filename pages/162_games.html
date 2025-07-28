@@ -1,0 +1,51 @@
+---
+layout: default
+title: 162.games • Gus Glover
+permalink: /162-games
+---
+
+<h1>
+  {% include external_link.html title='162.games' href='https://162.games' %}
+</h1>
+<div class="time-stamp">JUL 2025</div>
+
+<p>
+  This site breaks the MLB season down into series-by-series segments and graphs
+  those results over time. Gauging a team's performance through this lens allows
+  one to see through much of the noise in 162 individual results.
+  <em>Winning the series</em> is usually read as a more important indicator of
+  sustainable success.
+</p>
+  <div class="full-width">
+    <div style="max-width: 750px;">
+      <a href="https://162.games">
+      {% include image_card.html src="162_games.jpg" alt="Interface of 162.games
+      website with a graph of the 2025 Seattle Mariners season results." %}
+      </a>
+    </div>
+  </div>
+</a>
+
+<p>
+  Additionally, I've included a rough measure of the team's momentum at the time
+  the series took place. The aim is to easily address a common fan question:
+  <em>"Did we play this team at a good or bad time?"</em>
+</p>
+<br />
+
+<h2>
+  {% include external_link.html title='Tech details'
+  href='https://github.com/gglover/mlb-season-data-vis' %}
+</h2>
+
+<p>
+  The data is sourced from
+  <a href="https://statsapi.mlb.com/docs/">MLB's official stats API</a> using
+  <a href="https://github.com/toddrob99/MLB-StatsAPI">python bindings</a>. I use
+  a Lambda to refresh the results every night during the regular season. The
+  responses are condensed into a single ~400KB JSON file that contains series,
+  results, rankings, and measures of momentum for every team across every day in
+  the season.
+</p>
+
+<p>I chose D3, React, Tanstack Router, and Vite as my frontend stack.</p>
