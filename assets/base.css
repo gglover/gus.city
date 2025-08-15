@@ -12,6 +12,8 @@ html {
   --neutral-gray-3: #222222;
   --neutral-gray-4: #fcfcfc;
   --neutral-gray-5: #c0c0c0;
+
+  --light-text-gray: #505050;
 }
 
 body {
@@ -58,6 +60,7 @@ header {
   }
 
   canvas {
+    opacity: 0.9;
     cursor: grab;
   }
 
@@ -94,8 +97,14 @@ p,
 a {
   font-size: var(--space);
   color: inherit;
-  color: #444;
+  color: var(--light-text-gray);
   text-decoration-style: dotted;
+  transition: all 0.25s linear;
+}
+
+a:hover,
+.project:hover h2 {
+  color: black;
 }
 
 h1 a,
@@ -117,7 +126,7 @@ button {
   gap: 4px;
   border-radius: 2px;
   background-color: var(--neutral-gray-4);
-  border: 1px solid black;
+  border: 1px solid var(--light-text-gray);
   font-size: 12px;
   text-decoration: none;
   display: flex;
@@ -239,14 +248,12 @@ h2.section-divider span {
   }
 }
 
-.project,
-.external-link {
+.project {
   transition: background-color 200ms linear;
 }
 
 .project:hover,
-.project:active,
-.external-link:hover {
+.project:active {
   background-color: var(--neutral-gray-1);
 }
 
