@@ -5,12 +5,12 @@ layout: default
 <div>
   <h1>Gus Glover</h1>
   <p>
-    Software engineer from Seattle. Making cool stuff that I think should exist
-    ~
+    Software engineer from Seattle. Interested in data visualization, product
+    design, and 3D. Making cool stuff that I think should exist.
   </p>
 </div>
 
-<hr />
+<h2 class="section-divider"><span>Projects</span></h2>
 
 <div class="project-list">
   <a href="/162-games">
@@ -48,3 +48,82 @@ layout: default
     </article>
   </a>
 </div>
+
+<h2 class="section-divider"><span>Artwork</span></h2>
+
+<p>
+  I like to take physical structures out of their natural environment and
+  present them in surprising ways.
+</p>
+
+<div class="art-grid pswp-gallery" id="personal-art-gallery">
+  <!-- prettier-ignore -->
+  {% include gallery_image.html name='major_league_ballparks_poster' width=6000 height=4000
+      alt="A large format orthographic render of every current MLB stadium connected in a cohesive city grid." %}
+
+  <!-- prettier-ignore -->
+  {% include gallery_image.html name='post_alley' width=5000 height=2000 
+      alt="A 3D scanned chunk of Post Alley new Pike Place Market in Seattle." %}
+
+  <!-- prettier-ignore -->
+  <!-- {% include gallery_image.html name='hat_n_boots' width=5000 height=2000 %} -->
+
+  <!-- prettier-ignore -->
+  {% include gallery_image.html name='towers_of_seattle' width=2000 height=1571
+      alt="Towers of Seattle layed out in an organized flat layout." %}
+</div>
+
+<h2 class="section-divider"><span>Commercial Scans & Photography</span></h2>
+<p>
+  Work samples from <a href="/arcsine-imaging">my studio days</a>. Making shoes
+  look immaculate.
+</p>
+
+<div class="art-grid" id="commercial-art-gallery">
+  <!-- prettier-ignore -->
+  {% include gallery_image.html name='cosmic_redux' width=2000 height=2000
+      alt="Nike Cosmic Unity sneaker photograph with a dark background and sharp lighting." %}
+
+  <!-- prettier-ignore -->
+  {% include gallery_video.html name='kith_genesis' width=2000 height=2000
+      alt="Video of digitized New Balance X Kith Genesis sneakers." %}
+
+  <!-- prettier-ignore -->
+  {% include gallery_image.html name='lone_peak_w' width=2000 height=2000
+      alt="Studio lit Altra Lone peak sneakers in a green colorway with the heel raised." %}
+
+  <!-- prettier-ignore -->
+  {% include gallery_image.html name='move_insoles' width=2000 height=2000
+    alt="Adidas Superstar sneakers with Move Gameday insoles partially inserted. Sharp white background." %}
+
+  <!-- prettier-ignore -->
+  {% include gallery_video.html name='mont_blanc' width=2000 height=2000
+    alt="Video of digitized Altra Mont Blanc sneakers. Zooming in and out showing off USPs and unique angles." %}
+
+  <!-- prettier-ignore -->
+  {% include gallery_video.html name='cosmic_unity' width=2000 height=2000
+    alt="Video of digitized Nike Cosmic Unity sneakers. Zooming in and out showing off USPs and unique angles." %}
+</div>
+
+<script type="module">
+  import PhotoSwipeLightbox from "/assets/vendor/photoswipe-lightbox.esm.min.js";
+  import PhotoSwipeVideoPlugin from "/assets/vendor/photoswipe-video-plugin.esm.min.js";
+
+  const personalLightbox = new PhotoSwipeLightbox({
+    gallery: "#personal-art-gallery",
+    children: "a",
+    showHideAnimationType: "none",
+    pswpModule: () => import("/assets/vendor/photoswipe.esm.min.js"),
+  });
+  personalLightbox.init();
+
+  const commercialLightbox = new PhotoSwipeLightbox({
+    gallery: "#commercial-art-gallery",
+    children: "a",
+    showHideAnimationType: "none",
+    pswpModule: () => import("/assets/vendor/photoswipe.esm.min.js"),
+  });
+  const videoPlugin = new PhotoSwipeVideoPlugin(commercialLightbox, {});
+
+  commercialLightbox.init();
+</script>

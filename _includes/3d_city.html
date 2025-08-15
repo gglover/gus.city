@@ -8,9 +8,9 @@
 </script>
 
 <script type="module">
-  import * as THREE from 'three';
-  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+  import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
   const ASPECT_RATIO = 27 / 7;
   const FRUSTUM_SIZE = 5;
@@ -25,10 +25,10 @@
   const LIGHT_INTENSITY = 160;
   const LIGHT_OFFSET = [50, 0, 0];
 
-  const MODEL_GLB_PATH = 'assets/city.glb';
+  const MODEL_GLB_PATH = "assets/city.glb";
   const INITIAL_MODEL_ROTATION = 0.5;
 
-  const container = document.querySelector('header');
+  const container = document.querySelector("header");
   const containerWidth = container.clientWidth;
 
   const canvasWidth = containerWidth;
@@ -39,7 +39,7 @@
   renderer.setSize(canvasWidth, canvasHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
   container.appendChild(renderer.domElement);
-  renderer.domElement.style.display = 'none';
+  renderer.domElement.style.display = "none";
 
   // Create a scene
   const scene = new THREE.Scene();
@@ -47,12 +47,16 @@
 
   // Set up the camera (Orthographic)
   const camera = new THREE.OrthographicCamera(
-      -FRUSTUM_SIZE * ASPECT_RATIO, FRUSTUM_SIZE * ASPECT_RATIO,
-      FRUSTUM_SIZE, -FRUSTUM_SIZE, 
-      NEAR_CLIP, FAR_CLIP
+    -FRUSTUM_SIZE * ASPECT_RATIO,
+    FRUSTUM_SIZE * ASPECT_RATIO,
+    FRUSTUM_SIZE,
+    -FRUSTUM_SIZE,
+    NEAR_CLIP,
+    FAR_CLIP
   );
 
-  const position = window.localStorage.cameraStart?.split(',') ?? INITIAL_CAMERA_POSITION;
+  const position =
+    window.localStorage.cameraStart?.split(",") ?? INITIAL_CAMERA_POSITION;
   camera.position.set(...position);
   scene.add(camera);
 
@@ -70,45 +74,54 @@
   controls.update();
 
   // Add some lighting
-  const rectLight = new THREE.RectAreaLight(0xffffff, LIGHT_INTENSITY, LIGHT_SIZE, LIGHT_SIZE);
+  const rectLight = new THREE.RectAreaLight(
+    0xffffff,
+    LIGHT_INTENSITY,
+    LIGHT_SIZE,
+    LIGHT_SIZE
+  );
   rectLight.position.set(...LIGHT_OFFSET);
   rectLight.lookAt(0, 0, 0);
   camera.add(rectLight);
+
+  // const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+  // scene.add(ambientLight);
 
   // Load a GLB model
   let model = null;
 
   const loader = new GLTFLoader();
-  loader.load(MODEL_GLB_PATH,
-      gltf => {
-          model = gltf.scene;
-          model.rotateY(INITIAL_MODEL_ROTATION);
-          model.traverse(obj => {
-            if (obj.material) {
-              obj.material.metalness = 0;
-            } 
-          });
+  loader.load(
+    MODEL_GLB_PATH,
+    (gltf) => {
+      model = gltf.scene;
+      model.rotateY(INITIAL_MODEL_ROTATION);
+      model.traverse((obj) => {
+        if (obj.material) {
+          obj.material.metalness = 0;
+        }
+      });
 
-          scene.add(model);
+      scene.add(model);
 
-          // Remove loading highlights
-          renderer.domElement.style.display = 'block';
-          document.querySelector('header').classList.remove('shimmer');
+      // Remove loading highlights
+      renderer.domElement.style.display = "block";
+      document.querySelector("header").classList.remove("shimmer");
 
-          render();
-      },
-      undefined,
-      (error) => {
-          console.error('Error loading the model', error);
-      }
+      render();
+    },
+    undefined,
+    (error) => {
+      console.error("Error loading the model", error);
+    }
   );
 
   const render = () => {
-      requestAnimationFrame( render );
+    requestAnimationFrame(render);
 
-      controls.update();
-      window.localStorage.cameraStart = camera.position.toArray(); 
+    controls.update();
+    window.localStorage.cameraStart = camera.position.toArray();
 
-      renderer.render(scene, camera);
-  }
+    renderer.render(scene, camera);
+  };
 </script>
