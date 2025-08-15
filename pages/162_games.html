@@ -40,8 +40,8 @@ permalink: /162-games
 
 <p>
   The data is sourced from
-  <a href="https://statsapi.mlb.com/docs/">MLB's official stats API</a> using
-  <a href="https://github.com/toddrob99/MLB-StatsAPI">python bindings</a>. I use
+  {% include external_link.html title='MLB\'s official stats API' href='https://statsapi.mlb.com/docs/' %} using
+  {% include external_link.html title='python bindings' href='https://github.com/toddrob99/MLB-StatsAPI' %}. I use
   a Lambda to refresh the results every night during the regular season. The
   responses are condensed into a single ~400KB JSON file that contains series,
   results, rankings, and measures of momentum for every team across every day in

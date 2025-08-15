@@ -1,6 +1,6 @@
 /** Document setup **/
 html {
-  --content-max-width: 580px;
+  --content-max-width: 600px;
   --space-xs: 5px;
   --space-sm: 10px;
   --space: 15px;
@@ -28,7 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: auto;
-  padding: var(--space-lg) var(--space);
+  padding: var(--space-xl) var(--space);
   max-width: var(--content-max-width);
 }
 
@@ -41,11 +41,11 @@ main {
 
 header {
   position: relative;
-  aspect-ratio: 24 / 7;
+  aspect-ratio: 22 / 7;
   display: flex;
   align-items: end;
   gap: var(--space-xs);
-  margin-bottom: calc(var(--space) + var(--space-sm));
+  margin-bottom: var(--space-lg);
   border-top: 1px solid var(--neutral-gray-5);
   border-bottom: 3px solid black;
 
@@ -87,13 +87,20 @@ h4,
 h5,
 h6 {
   font-size: var(--space);
-  font-weight: bold;
+  font-weight: 600;
 }
 
 p,
 a {
   font-size: var(--space);
   color: inherit;
+  color: #444;
+  text-decoration-style: dotted;
+}
+
+h1 a,
+h2 a {
+  color: black;
 }
 
 ul {
@@ -206,12 +213,11 @@ h2.section-divider {
   border-bottom: 1px solid var(--neutral-gray-5);
   text-align: right;
   line-height: 0px;
-  margin: var(--space-lg) 0 var(--space) 0;
+  margin: var(--space) 0 var(--space) 0;
 }
 
 h2.section-divider span {
   background-color: var(--neutral-gray-4);
-  /* font-weight: normal; */
   padding-left: var(--space-xs);
 }
 
@@ -227,7 +233,9 @@ h2.section-divider span {
   border-radius: var(--space-sm);
 
   h2 {
+    color: black;
     text-decoration: underline;
+    text-decoration-style: dotted;
   }
 }
 
