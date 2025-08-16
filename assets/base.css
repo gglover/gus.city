@@ -43,13 +43,14 @@ main {
 
 header {
   position: relative;
-  aspect-ratio: 22 / 7;
   display: flex;
   align-items: end;
   gap: var(--space-xs);
   margin-bottom: var(--space-lg);
   border-top: 1px solid var(--neutral-gray-5);
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid var(--neutral-gray-3);
+  margin: var(--space-lg);
+  margin-top: 0;
 
   a {
     position: absolute;
@@ -60,12 +61,17 @@ header {
   }
 
   canvas {
-    opacity: 0.9;
     cursor: grab;
   }
 
   canvas:active {
     cursor: grabbing;
+  }
+}
+
+@media (width <= 600px) {
+  header {
+    margin: 0 0 var(--space-lg) 0;
   }
 }
 

@@ -5,12 +5,12 @@
 
   const ASPECT_RATIO = 27 / 7;
   const FRUSTUM_SIZE = 5;
-  const NEAR_CLIP = 1;
-  const FAR_CLIP = 1000;
+  const NEAR_CLIP = -5;
+  const FAR_CLIP = 40;
 
   const INITIAL_CAMERA_POSITION = [20, 0, 0];
   const DRAG_ROTATION_SPEED = 0.1;
-  const AUTO_ROTATION_SPEED = 0.25;
+  const AUTO_ROTATION_SPEED = 0.15;
 
   const LIGHT_SIZE = 5;
   const LIGHT_INTENSITY = 160;
@@ -81,15 +81,26 @@
   // Load a GLB model
   let model = null;
 
+  // 3. Create MeshNormalMaterial
+  // const material = new THREE.MeshNormalMaterial();
+  const material = new THREE.MeshDepthMaterial();
+
   const loader = new GLTFLoader();
   loader.load(
     MODEL_GLB_PATH,
     (gltf) => {
       model = gltf.scene;
       model.rotateY(INITIAL_MODEL_ROTATION);
-      model.traverse((obj) => {
-        if (obj.material) {
-          obj.material.metalness = 0;
+      model.traverse((child) => {
+        if (child.isMesh) {
+          // Ensure the geometry is a BufferGeometry
+          if (child.geometry instanceof THREE.BufferGeometry) {
+            child.geometry.computeVertexNormals();
+          }
+        }
+        if (child.material) {
+          child.material.metalness = 0;
+          // child.material = material;
         }
       });
 
