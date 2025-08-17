@@ -1,4 +1,6 @@
 <script type="module">
+  const loadStart = Date.now();
+
   import * as THREE from "three";
   import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
   import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -16,7 +18,11 @@
   const LIGHT_INTENSITY = 160;
   const LIGHT_OFFSET = [50, 0, 0];
 
-  const MODEL_GLB_PATH = "assets/city.glb";
+  const FADE_START_INTENSITY = 4;
+  const FADE_FALLOFF = 0.04;
+  const MIN_LOAD_DURATION_FOR_FADE = 200; // ms;
+
+  const MODEL_GLB_PATH = "/assets/city.glb";
   const INITIAL_MODEL_ROTATION = 0.5;
 
   const container = document.querySelector("header");
@@ -48,6 +54,7 @@
 
   const position =
     window.localStorage.cameraStart?.split(",") ?? INITIAL_CAMERA_POSITION;
+
   camera.position.set(...position);
   scene.add(camera);
 
@@ -75,15 +82,11 @@
   rectLight.lookAt(0, 0, 0);
   camera.add(rectLight);
 
-  // const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-  // scene.add(ambientLight);
+  const ambientLight = new THREE.AmbientLight(0xffffff, FADE_START_INTENSITY);
+  scene.add(ambientLight);
 
   // Load a GLB model
   let model = null;
-
-  // 3. Create MeshNormalMaterial
-  // const material = new THREE.MeshNormalMaterial();
-  const material = new THREE.MeshDepthMaterial();
 
   const loader = new GLTFLoader();
   loader.load(
@@ -92,23 +95,22 @@
       model = gltf.scene;
       model.rotateY(INITIAL_MODEL_ROTATION);
       model.traverse((child) => {
-        if (child.isMesh) {
-          // Ensure the geometry is a BufferGeometry
-          if (child.geometry instanceof THREE.BufferGeometry) {
-            child.geometry.computeVertexNormals();
-          }
-        }
         if (child.material) {
           child.material.metalness = 0;
-          // child.material = material;
         }
       });
 
       scene.add(model);
 
+      const loadTime = Date.now() - loadStart;
+
+      if (loadTime < MIN_LOAD_DURATION_FOR_FADE) {
+        ambientLight.intensity = 0;
+      }
+
       // Remove loading highlights
       renderer.domElement.style.display = "block";
-      document.querySelector("header").classList.remove("shimmer");
+      container.querySelector(".loader").classList.remove("loader");
 
       render();
     },
@@ -120,6 +122,10 @@
 
   const render = () => {
     requestAnimationFrame(render);
+
+    if (ambientLight.intensity > 0) {
+      ambientLight.intensity -= FADE_FALLOFF;
+    }
 
     controls.update();
     window.localStorage.cameraStart = camera.position.toArray();
