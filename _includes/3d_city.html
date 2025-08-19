@@ -14,33 +14,37 @@
   const DRAG_ROTATION_SPEED = 0.1;
   const AUTO_ROTATION_SPEED = 0.15;
 
+  const BACKGROUND_COLOR = 0x000000;
+
   const LIGHT_SIZE = 5;
-  const LIGHT_INTENSITY = 160;
+  const LIGHT_INTENSITY = 250;
   const LIGHT_OFFSET = [50, 0, 0];
 
-  const FADE_START_INTENSITY = 4;
-  const FADE_FALLOFF = 0.04;
+  const FADE_START_INTENSITY = 3;
+  const FADE_FALLOFF = 0.02;
   const MIN_LOAD_DURATION_FOR_FADE = 200; // ms;
 
   const MODEL_GLB_PATH = "/assets/city.glb";
   const INITIAL_MODEL_ROTATION = 0.5;
 
-  const container = document.querySelector("header");
-  const containerWidth = container.clientWidth;
+  const container = document.querySelector("header .wrapper");
 
-  const canvasWidth = containerWidth;
-  const canvasHeight = containerWidth / ASPECT_RATIO;
+  const ASPECT = 10 / 3;
+
+  const canvasWidth = Math.min(500, window.screen.width);
+  const canvasHeight = canvasWidth / ASPECT;
 
   // Create a renderer
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(canvasWidth, canvasHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
   renderer.domElement.style.display = "none";
 
   // Create a scene
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xfcfcfc);
+  // scene.background = new THREE.Color(BACKGROUND_COLOR);
 
   // Set up the camera (Orthographic)
   const camera = new THREE.OrthographicCamera(
@@ -110,7 +114,7 @@
 
       // Remove loading highlights
       renderer.domElement.style.display = "block";
-      container.querySelector(".loader").classList.remove("loader");
+      container.querySelector(".loader").classList.remove("pulse-background");
 
       render();
     },
