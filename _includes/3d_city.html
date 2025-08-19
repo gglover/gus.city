@@ -13,6 +13,7 @@
   const INITIAL_CAMERA_POSITION = [20, 0, 0];
   const DRAG_ROTATION_SPEED = 0.1;
   const AUTO_ROTATION_SPEED = 0.15;
+  const MAX_FRAME_TIME_SECONDS = 0.1;
 
   const BACKGROUND_COLOR = 0x000000;
 
@@ -20,8 +21,6 @@
   const LIGHT_INTENSITY = 250;
   const LIGHT_OFFSET = [50, 0, 0];
 
-  const FADE_START_INTENSITY = 3;
-  const FADE_FALLOFF = 0.02;
   const MIN_LOAD_DURATION_FOR_FADE = 200; // ms;
 
   const MODEL_GLB_PATH = "/assets/city.glb";
@@ -31,7 +30,7 @@
 
   const ASPECT = 10 / 3;
 
-  const canvasWidth = Math.min(500, window.screen.width);
+  const canvasWidth = Math.min(520, window.screen.width);
   const canvasHeight = canvasWidth / ASPECT;
 
   // Create a renderer
@@ -84,10 +83,10 @@
   );
   rectLight.position.set(...LIGHT_OFFSET);
   rectLight.lookAt(0, 0, 0);
-  camera.add(rectLight);
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, FADE_START_INTENSITY);
-  scene.add(ambientLight);
+  const lightHandle = new THREE.Object3D();
+  lightHandle.add(rectLight);
+  camera.add(lightHandle);
 
   // Load a GLB model
   let model = null;
@@ -107,9 +106,8 @@
       scene.add(model);
 
       const loadTime = Date.now() - loadStart;
-
-      if (loadTime < MIN_LOAD_DURATION_FOR_FADE) {
-        ambientLight.intensity = 0;
+      if (loadTime > MIN_LOAD_DURATION_FOR_FADE) {
+        renderer.domElement.classList.add("fade-in");
       }
 
       // Remove loading highlights
@@ -124,16 +122,26 @@
     }
   );
 
+  let frameStart = window.performance.now();
   const render = () => {
     requestAnimationFrame(render);
 
-    if (ambientLight.intensity > 0) {
-      ambientLight.intensity -= FADE_FALLOFF;
-    }
+    const frameEnd = window.performance.now();
+    let delta = (frameEnd - frameStart) / 1000;
+    delta = Math.min(MAX_FRAME_TIME_SECONDS, delta);
 
-    controls.update();
+    // lightHandle.rotateZ(0.003);
+    // console.log(lightHandle.)
+
+    frameStart = frameEnd;
+
+    controls.update(delta);
     window.localStorage.cameraStart = camera.position.toArray();
 
     renderer.render(scene, camera);
   };
+
+  // window.GUS_CITY_GLOBALS.flipLights = () => {
+  //   console.log(LIGHT_OFFSET);
+  // };
 </script>
