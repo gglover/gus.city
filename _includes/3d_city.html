@@ -20,6 +20,9 @@
   const LIGHT_SIZE = 5;
   const LIGHT_INTENSITY = 250;
   const LIGHT_OFFSET = [50, 0, 0];
+  let targetRotation = document.documentElement.classList.contains("dark-mode")
+    ? 0
+    : Math.PI;
 
   const MIN_LOAD_DURATION_FOR_FADE = 200; // ms;
 
@@ -86,6 +89,7 @@
 
   const lightHandle = new THREE.Object3D();
   lightHandle.add(rectLight);
+  lightHandle.rotation.z = targetRotation;
   camera.add(lightHandle);
 
   // Load a GLB model
@@ -130,7 +134,14 @@
     let delta = (frameEnd - frameStart) / 1000;
     delta = Math.min(MAX_FRAME_TIME_SECONDS, delta);
 
-    // lightHandle.rotateZ(0.003);
+    // if (Math.abs(lightHandle.rotation.z - targetRotation) > 0.005) {
+    lightHandle.rotation.z = THREE.MathUtils.lerp(
+      lightHandle.rotation.z,
+      targetRotation,
+      0.007
+    );
+    // }
+
     // console.log(lightHandle.)
 
     frameStart = frameEnd;
@@ -141,7 +152,7 @@
     renderer.render(scene, camera);
   };
 
-  // window.GUS_CITY_GLOBALS.flipLights = () => {
-  //   console.log(LIGHT_OFFSET);
-  // };
+  window.flipLights = () => {
+    targetRotation = targetRotation > 0 ? 0 : Math.PI;
+  };
 </script>
