@@ -18,7 +18,7 @@
   const BACKGROUND_COLOR = 0x000000;
 
   const LIGHT_SIZE = 5;
-  const LIGHT_INTENSITY = 250;
+  const LIGHT_INTENSITY = 200;
   const LIGHT_OFFSET = [50, 0, 0];
   let targetRotation = document.documentElement.classList.contains("dark-mode")
     ? 0
@@ -138,7 +138,7 @@
     lightHandle.rotation.z = THREE.MathUtils.lerp(
       lightHandle.rotation.z,
       targetRotation,
-      0.007
+      0.01
     );
     // }
 
