@@ -89,7 +89,8 @@
 
   const lightHandle = new THREE.Object3D();
   lightHandle.add(rectLight);
-  lightHandle.rotation.z = targetRotation;
+  lightHandle.rotation.y = targetRotation;
+  lightHandle.rotation.x = Math.PI / 3;
   camera.add(lightHandle);
 
   // Load a GLB model
@@ -134,15 +135,11 @@
     let delta = (frameEnd - frameStart) / 1000;
     delta = Math.min(MAX_FRAME_TIME_SECONDS, delta);
 
-    // if (Math.abs(lightHandle.rotation.z - targetRotation) > 0.005) {
-    lightHandle.rotation.z = THREE.MathUtils.lerp(
-      lightHandle.rotation.z,
+    lightHandle.rotation.y = THREE.MathUtils.lerp(
+      lightHandle.rotation.y,
       targetRotation,
       0.01
     );
-    // }
-
-    // console.log(lightHandle.)
 
     frameStart = frameEnd;
 
