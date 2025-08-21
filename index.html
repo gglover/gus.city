@@ -5,9 +5,10 @@ layout: default
 <div>
   <h1>Gus Glover</h1>
   <p>
-    I'm a software engineer from Seattle, with an interest in product design,
-    data visualization, and 3D graphics. I make cool stuff that I think should
-    exist.
+    I'm a software developer from Seattle, most recently at Amazon. I specialize
+    in interface design, data visualization, and 3D graphics. I can build highly
+    polished products or knock out prototypes on a deadline, always with a focus
+    on <em>simplicity</em>.
   </p>
 </div>
 
@@ -76,8 +77,9 @@ layout: default
 
 <h2 class="section-divider"><span>Commercial Scans & Photography</span></h2>
 <p>
-  Here are some work samples from <a href="/arcsine-imaging">my studio days</a>.
-  We spent a lot of time making shoes look nice.
+  Here are some photogrammetry models and product shots from
+  <a href="/arcsine-imaging">my studio days</a>. We spent a lot of time making
+  shoes look really good.
 </p>
 
 <div class="art-grid" id="commercial-art-gallery">
@@ -116,7 +118,6 @@ layout: default
     showHideAnimationType: "none",
     pswpModule: () => import("/assets/vendor/photoswipe.esm.min.js"),
   });
-  personalLightbox.init();
 
   const commercialLightbox = new PhotoSwipeLightbox({
     gallery: "#commercial-art-gallery",
@@ -126,5 +127,6 @@ layout: default
   });
   const videoPlugin = new PhotoSwipeVideoPlugin(commercialLightbox, {});
 
+  personalLightbox.init();
   commercialLightbox.init();
 </script>
