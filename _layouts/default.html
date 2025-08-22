@@ -29,6 +29,19 @@
       content="{{ page.title | default: site.title }}"
     />
 
+    <script>
+      const applyTheme = () => {
+        const initialTheme = window.localStorage.getItem("theme") ?? "dark";
+
+        if (initialTheme === "dark") {
+          document.documentElement.classList.add("dark-mode");
+        }
+      };
+
+      window.addEventListener("pageshow", applyTheme);
+      applyTheme();
+    </script>
+
     <link rel="stylesheet" href="/assets/base.css" />
     <link rel="stylesheet" href="/assets/vendor/photoswipe.css" />
 

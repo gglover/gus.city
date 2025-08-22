@@ -36,6 +36,8 @@
   const canvasWidth = Math.min(520, window.screen.width);
   const canvasHeight = canvasWidth / ASPECT;
 
+  const clock = new THREE.Clock();
+
   // Create a renderer
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(canvasWidth, canvasHeight);
@@ -127,23 +129,19 @@
     }
   );
 
-  let frameStart = window.performance.now();
   const render = () => {
     requestAnimationFrame(render);
 
-    const frameEnd = window.performance.now();
-    let delta = (frameEnd - frameStart) / 1000;
-    delta = Math.min(MAX_FRAME_TIME_SECONDS, delta);
+    let deltaTime = clock.getDelta();
+    deltaTime = Math.min(MAX_FRAME_TIME_SECONDS, deltaTime);
 
     lightHandle.rotation.y = THREE.MathUtils.lerp(
       lightHandle.rotation.y,
       targetRotation,
-      0.01
+      deltaTime
     );
 
-    frameStart = frameEnd;
-
-    controls.update(delta);
+    controls.update(deltaTime);
     window.localStorage.cameraStart = camera.position.toArray();
 
     renderer.render(scene, camera);

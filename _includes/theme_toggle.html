@@ -32,11 +32,6 @@
 </button>
 
 <script>
-  const initialTheme = window.localStorage.getItem("theme") ?? "dark";
-  if (initialTheme === "dark") {
-    document.documentElement.classList.add("dark-mode");
-  }
-
   document.querySelector(".theme-toggle").addEventListener("click", () => {
     const nextTheme = document.documentElement.classList.contains("dark-mode")
       ? "light"
