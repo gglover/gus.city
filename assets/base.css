@@ -293,6 +293,7 @@ h2.section-divider {
 
 h2.section-divider span {
   background-color: var(--bg);
+  transition: background-color 0.2s ease-in;
   padding-left: var(--space-xs);
 }
 
@@ -366,6 +367,11 @@ h2.section-divider span {
   cursor: pointer;
   box-shadow: var(--card-box-shadow);
   aspect-ratio: 1;
+  transition: opacity 0.2s ease;
+}
+
+.art-grid a:hover img {
+  opacity: 0.8;
 }
 
 .art-grid a[data-pswp-type="video"] {
